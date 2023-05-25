@@ -54,7 +54,7 @@ export class EmpContactInfoComponent implements OnInit {
   ngOnInit() {
     this.getCountries();
     this.getDivision();
-    //this.getAllThana();
+    this.getAllThana();
     this.getEmpContactInfo();
     this.empContactInfo.companyID = this.compId;
     this.empContactInfo.empCode = this.empCode;
