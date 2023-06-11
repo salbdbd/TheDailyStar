@@ -62,7 +62,6 @@ export class EmpContactInfoComponent implements OnInit {
   }
 
   getEmpContactInfo(){
-    debugger
     if(this.empCode=="" || this.empCode==null){return;}
     this.empService.getContactInfo(this.compId, this.empCode).subscribe((response:ApiResponse)=>{
       if(response.status){
@@ -88,6 +87,7 @@ export class EmpContactInfoComponent implements OnInit {
     this.empService.saveContactInfo(this.contactForm.value).subscribe((response:ApiResponse)=>{
       if(response.status){
         this.toastr.success(response.result, 'Success');
+        this.getEmpContactInfo()
         this.reset();
       }else{
         this.toastr.error(response.result, 'Erorr!');
