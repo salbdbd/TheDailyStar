@@ -86,7 +86,7 @@ namespace WebApiCore.DbContext.Security
         {
             using(var con = new SqlConnection(Connection.ConnectionString()))
             {
-                string sql = $"SELECT * FROM Users WHERE LoginID='{empCode}' AND UserTypeID=3";
+                string sql = $"SELECT * FROM Users WHERE EmpCode='{empCode}'";
                 List<UserModel> users = con.Query<UserModel>(sql).ToList();
                 return users;
             }
