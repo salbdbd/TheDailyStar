@@ -138,7 +138,7 @@ namespace WebApiCore.DbContext.HR
             using (var con = new SqlConnection(Connection.ConnectionString()))
             {
                 string sql = $@"SELECT EmpCode, EmpName FROM view_employment_info
-          WHERE GradeValue !=5 AND CompanyID = {compId} AND Status='Active' AND IsBlock='No' AND Active=1";
+          WHERE   CompanyID = {compId} AND Status='Active' AND IsBlock='No' AND Active=1";
                 var employees = con.Query<EmpSearchViewModel>(sql).ToList();
                 return employees;
             }
