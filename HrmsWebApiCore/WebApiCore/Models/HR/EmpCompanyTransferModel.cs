@@ -30,6 +30,10 @@ namespace WebApiCore.Models.HR
     public string Note { get; set; }
     public int? TPType { get; set; }
     public int? CompanyID { get; set; }
+    public int? PreSectionID { get; set; }
+    public int? PasSectionID { get; set; }
     public string jobresponsibilities { get; set; }
+    public decimal? PreAmount { get; set; }
+    public decimal? PasAmount { get; set; }
   }
 }

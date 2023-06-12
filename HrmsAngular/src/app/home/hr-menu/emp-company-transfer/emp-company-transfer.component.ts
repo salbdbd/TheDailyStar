@@ -21,6 +21,7 @@ import { SearchEmployee } from '../../../models/hr/search-emp.model';import { Em
 import { EmploymentService } from '../../../services/hr/employment.service';
 import { EmpPromotionViewModel } from '../../../models/hr/emp-promotion-view.model';
 import { CompanyModel } from '../../../models/security/company.model';
+import { ListKeyManager } from '@angular/cdk/a11y';
 ;
 
 @Component({
@@ -151,6 +152,7 @@ export class EmpCompanyTransferComponent extends Pagination implements OnInit {
       this.alldata=response.result as EmpPromotionViewModel[];
       }
       else{
+        this.alldata=[];
       }
     })
   }

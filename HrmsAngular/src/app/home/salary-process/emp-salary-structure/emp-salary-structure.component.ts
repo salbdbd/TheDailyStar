@@ -253,6 +253,7 @@ saveEmpSalaryStructure(){
       if(response.status){
         this.toster.success(response.result,"Success");
         this.Reset();
+        this.getSalaryHead();
       }
       else{
         this.toster.error(response.result,"Failed!!");

@@ -13,7 +13,7 @@ namespace WebApiCore.DbContext.HR
         public static EmpCompanyTransferModel GetCompanytransfer(string empCode, int companyID,int ptType)
         {
             var conn = new SqlConnection(Connection.ConnectionString());
-            var dateset = conn.QuerySingle<EmpCompanyTransferModel>("SELECT  Top 1 * FROM EmpTransfer WHERE TPType='"+ptType+"' AND EmpCode='" + empCode + "' AND CompanyID=" + companyID+" Order By ID DESC");
+            var dateset = conn.QuerySingle<EmpCompanyTransferModel>("SELECT  Top 1 * FROM EmpTransfer WHERE  EmpCode='" + empCode + "' AND CompanyID=" + companyID+" Order By ID DESC");
             return dateset;
         }
 
@@ -47,7 +47,11 @@ namespace WebApiCore.DbContext.HR
                 companyTransfer.TransferDate,
                 companyTransfer.TPType,
                 companyTransfer.CompanyID,
-                companyTransfer.jobresponsibilities
+                companyTransfer.jobresponsibilities,
+                companyTransfer.PreAmount,
+                companyTransfer.PasAmount,
+                companyTransfer.PreSectionID,
+                companyTransfer.PasSectionID
             };
             int rowAffect = conn.Execute("sp_EmpTransfer_Save",param:varperam,commandType:CommandType.StoredProcedure);
             return rowAffect > 0;
@@ -62,6 +66,19 @@ namespace WebApiCore.DbContext.HR
                 CompanyID 
             };
             var dataset=conn.Query<TransferViweModel>("spGetPromotionTransferList",param:peram,commandType:CommandType.StoredProcedure).ToList();
+            return dataset;
+        }
+
+
+        public static List<TransferViweModel> GetAllTransferType(int CompanyID)
+        {
+            var conn = new SqlConnection(Connection.ConnectionString());
+            var peram = new
+            {
+                
+                CompanyID
+            };
+            var dataset = conn.Query<TransferViweModel>("spGetTransferType", param: peram, commandType: CommandType.StoredProcedure).ToList();
             return dataset;
         }
         public static EmpCompanyTransferModel getEmploymentSalaryDetails(string EmpCode, int CompanyID)

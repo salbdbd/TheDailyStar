@@ -65,6 +65,7 @@ getJobDescriptionById(id:number){
     obj.empCode=this.jobDescriptionForm.controls.empCode.value;
     obj.pOptions=1;
     obj.status=this.jobDescriptionForm.controls.status.value;
+    console.log(obj,'obj')
    this.employmentService.saveJobDescription(obj).subscribe((response:ApiResponse)=>{
      if(response.status){
        this.btnStatus='Save';
@@ -79,7 +80,7 @@ getJobDescriptionById(id:number){
 }
   createForm(){
     this.jobDescriptionForm=this.formBuilde.group({
-      id:[,[]],
+      id:[0,[]],
       empName:[this.empName,[]],
       empCode:[this.empCode,[]],
       description:[,[Validators.required]],

@@ -22,4 +22,8 @@ export class CompanyTransferService {
       getEmploymentSalaryDetails(empCode:string,companyID:number){
         return this.http.get(environment.apiUrl+'/home/hr/company/transfer/getEmploymentsalary/EmpCode/'+empCode+'/CompanyID/'+companyID)
       }
+
+      GetTransferType(companyID:number){
+        return this.http.get(environment.apiUrl+'/hr/company/transfer/transfertype/get/companyId/'+companyID)
+       }
 }

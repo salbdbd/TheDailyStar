@@ -18,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmpPromotionViewModel } from '../../../models/hr/emp-promotion-view.model';
 import { Employment } from '../../../models/hr/employment.model';
 import { EmploymentService } from '../../../services/hr/employment.service';
+import { EmpBlockInfoModel } from '../../../models/hr/emp-block-info.model';
 
 @Component({
   selector: 'app-emp-pro-info',
@@ -38,6 +39,7 @@ export class EmpProInfoComponent implements OnInit {
   alldata:EmpPromotionViewModel[];
   allDesignation: BasicEntry[] = [];
   allEmployeeType: EmpTypeModel[] = [];
+  transferList:any[]=[];
   constructor(
     private basicES: BasicEntryService,
     private formBuilder:FormBuilder,
@@ -58,6 +60,8 @@ export class EmpProInfoComponent implements OnInit {
     this.AllEmployeeType();
     this.AllSalaryGrade();
     this.createForm();
+    this.getAllTransferType();
+    // this.getProInfoView(empcod);
   }
   AllEmployeeType() {
     this.empTypeES.GetEmpType().subscribe((response: ApiResponse) => {
@@ -142,6 +146,7 @@ export class EmpProInfoComponent implements OnInit {
       if (response.status) {
         this.toaster.success(response.result, "Success");
         this.getProInfoView(this.formVal.empCode);
+        this.reset();
       } else {
         this.toaster.error(response.result, 'Failed')
       }
@@ -153,7 +158,22 @@ export class EmpProInfoComponent implements OnInit {
     this.alldata=response.result as EmpPromotionViewModel[];
       }
       else{
+        this.alldata=[];
       }
+    })
+  }
+  getAllTransferType(){
+    this.companyTransferES.GetTransferType(this.compId).subscribe((response:ApiResponse)=>{
+      if(response.status){
+    this.transferList=response.result as any[];
+     }
+      else{
+      }
+    })
+  }
+  onSelectType(type){
+    this.empPromotion.patchValue({
+      tpType:type.id
     })
   }
   createForm(){
@@ -184,9 +204,10 @@ export class EmpProInfoComponent implements OnInit {
       transferDateNgb: [, [Validators.required]],
       transferDate: [, []],
       note: [, []],
-      tpType: [2, []],
+      tpType: [, []],
       companyID: [this.compId, []],
       jobresponsibilities: [, []],
+      transferType:[,[]]
   })
   }
   get f(){

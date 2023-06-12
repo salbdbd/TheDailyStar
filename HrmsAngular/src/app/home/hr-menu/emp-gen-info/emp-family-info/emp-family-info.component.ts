@@ -57,7 +57,7 @@ export class EmpFamilyInfoComponent implements OnInit {
     this.getallLocation();
     this.getallOccupation();
     this.getallNationality();
-    this.getEmpFamilyInfo(this.empCode);
+    this.getEmpFamilyInfo();
   }
 
 getAllRelationship(){
@@ -89,15 +89,17 @@ getallNationality(){
   })
 }
 
-  getEmpFamilyInfo(empCode:string){
-    if(empCode=="" || empCode==null){return;}
-    this.empService.getFamilyInfo(this.compId, empCode).subscribe((response:ApiResponse)=>{
+  getEmpFamilyInfo(){
+    // if(empCode=="" || empCode==null){return;}
+    this.empService.getFamilyInfo(this.compId, this.empFamilyInfoForm.value.empCode).subscribe((response:ApiResponse)=>{
       if(response.status){
         this.empFamilyInfo = response.result as EmpFamilyInfo[];
-        console.log(this.empFamilyInfo);
         this.empFamilyInfo.forEach(member=>{
           this.remainingPercent = this.remainingPercent-member.percentage;
         })
+      }
+      else{
+        this.empFamilyInfo=[];
       }
     })
   }
@@ -142,6 +144,7 @@ saveOrUpdateEmpFamily(){
           this.empFamilyInfo[index] = this.formVal;
         }else{
         }
+       this.getEmpFamilyInfo();
         this.resetFamily();
       }else{
         this.toastr.error(response.result, 'Failed');
@@ -157,7 +160,9 @@ saveOrUpdateEmpFamily(){
 confirmRemoveFamilyMember(){
   this.empService.deleteEmpFamily(this.personIdForDelete).subscribe((response:ApiResponse)=>{
     if(response.status){
-      this.toastr.success(response.result, "Success");
+      this.toastr.success(response.result, "Deleted Successfully");
+      this.getEmpFamilyInfo();
+      this.resetFamily();
       this.modalService.dismissAll();
     }else{
       this.toastr.error(response.result, "Failed")

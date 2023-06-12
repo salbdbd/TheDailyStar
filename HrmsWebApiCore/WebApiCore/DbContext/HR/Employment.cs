@@ -188,7 +188,8 @@ WHERE eei.OT='Yes' AND COALESCE(eei.ReportTo,'')='{bossId}'";
                     jobDescription.EmpCode,
                     jobDescription.Msg,
                     jobDescription.pOptions,
-                    jobDescription.Status
+                    jobDescription.Status,
+                    jobDescription.JobAssignDate
                 };
                 var rowAffect = con.Execute("sp_EmpJobDescription", param: peram, commandType: CommandType.StoredProcedure);
                 return rowAffect > 0;

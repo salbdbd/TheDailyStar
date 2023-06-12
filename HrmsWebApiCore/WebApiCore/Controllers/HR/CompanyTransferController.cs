@@ -49,6 +49,37 @@ namespace WebApiCore.Controllers.HR
 
         }
         [Authorize()]
+        [HttpGet]
+        [ApiVersion("1")]
+        [Route("api/v{version:apiVersion}/hr/company/transfer/transfertype/get/companyId/{companyID}")]
+        public IActionResult GetTransferType(int companyID)
+         {
+            Response response = new Response("/hr/company/transfer/transfertype/get/companyId/" + companyID);
+            try
+            {
+                var result = EmpCompanyTransfer.GetAllTransferType(companyID);
+                if (result != null)
+                {
+                    response.Status = true;
+                    response.Result = result;
+                }
+                else
+                {
+                    response.Status = false;
+                    response.Result = "No data found";
+                }
+
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Result = err.Message;
+                return Ok(response);
+            }
+
+        }
+        [Authorize()]
         [HttpPost]
         [ApiVersion("1")]
         [Route("api/v{version:apiVersion}/home/hr/company/transfer/save/update")]

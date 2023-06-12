@@ -24,6 +24,8 @@ namespace WebApiCore.ViewModels.HR
         public string Note { get; set; }
         public string PreLocation { get; set; }
         public string PasLocation { get; set; }
+        public int ID { get; set; }
+        public string Description { get; set; }
      
     }
 }
