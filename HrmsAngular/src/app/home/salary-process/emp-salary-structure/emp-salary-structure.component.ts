@@ -59,9 +59,10 @@ export class EmpSalaryStructureComponent extends Pagination implements OnInit {
     this.comid=AuthService.getLoggedCompanyId();
     this.structureList();
     this.createEmpSalaryForm();
+    this.getSalaryHead();
     this.getAllAddition(1);
     this.getAllDeduction(1);
-    this.getSalaryHead();
+    
     this.getAllType();
     this.getBasedOnItem()
     // this.getEmpSalaryAmount()
@@ -252,8 +253,11 @@ saveEmpSalaryStructure(){
     this.sPService.saveEmpSalaryStructure(obj).subscribe((response:ApiResponse)=>{
       if(response.status){
         this.toster.success(response.result,"Success");
-        this.Reset();
-        this.getSalaryHead();
+         this.Reset();
+         this.getAllAddition(1);
+       this.getAllDeduction(1);
+         
+          
       }
       else{
         this.toster.error(response.result,"Failed!!");
@@ -414,9 +418,11 @@ Reset(){
   this.isSubmitted=false;
   this.totalAdditionAmount=0;
   this.totalDeductionAmount=0;
-  // this.empSalaryForm.reset();
-  this.createEmpSalaryForm();
+  //  this.empSalaryForm.reset();
+   this.createEmpSalaryForm();
+   this.getSalaryStructure(this.f.empCode.value);
   this.empAdditionForm=this.formBuilder.array([]);
   this.empDeductionForm=this.formBuilder.array([]);
+  // this.getSalaryHead();
 }
 }

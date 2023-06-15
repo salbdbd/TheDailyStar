@@ -419,25 +419,8 @@
                             <input formControlName="note" type="text" class="form-control" placeholder="Note">
                         </div>
                     </div>
-                    <!-- <div class="form-group row">
-                        <label class="col-form-label col-sm-4 ">Type
-                          <i class="text-danger">*</i>
-                        </label>
-                        <div class="col-sm-8">
-                        <ng-select formControlName="tpType" [items]="transferList" bindLabel="description" bindValue="id"
-                        [ngClass]="{'is-invalid':(isSubmitted || f['tpType'].touched || f['tpType'].dirty)&& f['tpType'].invalid}"
-                        (change)="onSelectType($event)" placeholder="Select Type" ></ng-select>          
-                        </div>
-                        <div
-                        *ngIf="f['tpType'].invalid && (isSubmitted || f['tpType'].touched || f['tpType'].dirty)"
-                        class="text-danger">
-                        <i *ngIf="f['tpType'].errors['required']">Type is Required</i>
-                      </div>
-                      </div> -->
-
-                </div>
-
-            </div>
+        </div>
+   </div>
             <div class="row">
                 <div class="demo-inline-spacing mt-3" style="margin:0 auto">
                     <button (click)="reset()" type="clear" class="btn btn-info">
