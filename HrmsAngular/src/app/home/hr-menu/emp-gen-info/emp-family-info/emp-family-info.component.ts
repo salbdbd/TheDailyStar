@@ -94,9 +94,9 @@ getallNationality(){
     this.empService.getFamilyInfo(this.compId, this.empFamilyInfoForm.value.empCode).subscribe((response:ApiResponse)=>{
       if(response.status){
         this.empFamilyInfo = response.result as EmpFamilyInfo[];
-        this.empFamilyInfo.forEach(member=>{
-          this.remainingPercent = this.remainingPercent-member.percentage;
-        })
+        //  this.empFamilyInfo.forEach(member=>{
+        //   this.remainingPercent = this.remainingPercent-member.percentage;
+        // })
       }
       else{
         this.empFamilyInfo=[];
@@ -131,11 +131,16 @@ saveOrUpdateEmpFamily(){
     if(this.empFamilyInfoForm.invalid){
       this.toastr.error("Fill all required field, * marked field are required!", 'Invalid Submission');
       return;
-    }
-    else if(this.remainingPercent<this.empFamilyInfoForm.controls.percentage.value || this.empFamilyInfoForm.controls.percentage.value<=0){
-     this.toastr.warning("Percentage Full");
-    }
+    } 
+    // else if( this.empFamilyInfoForm.value.id==0 && this.remainingPercent<this.empFamilyInfoForm.controls.percentage.value || this.empFamilyInfoForm.controls.percentage.value<=0){
+    //  this.toastr.warning("Percentage Full");
+    // }
+    
+    else if( this.empFamilyInfoForm.controls.percentage.value>this.remainingPercent){
+      this.toastr.warning("Percentage should be less than 100");
+     }
     else{
+      console.log(this.empFamilyInfoForm.value,'this.empFamilyInfoForm.value')
     this.empService.saveOrUpdateEmpFamily(this.empFamilyInfoForm.value).subscribe((response:ApiResponse)=>{
       if(response.status){
         this.toastr.success(response.result, 'Success');

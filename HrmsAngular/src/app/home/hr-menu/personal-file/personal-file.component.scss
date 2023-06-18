@@ -1,6 +1,8 @@
 #flipbook {
     margin-left: 20px !important;
-    height: 700px;
+    // height: 700px;
+    height: 800px;
+    overflow-x: scroll;
 }
 
 #flipbook .page {

@@ -40,6 +40,8 @@ export class ThanaComponent implements OnInit {
     this.createForm();
     this.getCountries();
     this.getDivision();
+    // this.getPreDistrict();s
+
   }
   getCountries(){
     this.basicES.getCountry().subscribe((response:ApiResponse)=>{
