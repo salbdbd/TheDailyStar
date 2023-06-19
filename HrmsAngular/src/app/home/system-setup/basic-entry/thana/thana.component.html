@@ -10,8 +10,9 @@
       <i class="text-danger">*</i>
     </label>
                     <div class="col-sm-9">
-                        <ng-select [ngClass]="{'is-invalid': (f['preDivisionID'].touched || f['preDivisionID'].dirty || isSubmitted) && f['preDivisionID'].invalid}" [items]="allDivision" bindLabel="divisionName" bindValue="id" formControlName="preDivisionID" placeholder="Select division"
-                            (change)="getPreDistrict(f['preDivisionID'].value)" [disabled]="false">
+                        <ng-select [ngClass]="{'is-invalid': (f['preDivisionID'].touched || f['preDivisionID'].dirty || isSubmitted) && f['preDivisionID'].invalid}" 
+                        [items]="allDivision" bindLabel="divisionName" bindValue="divisionID" formControlName="preDivisionID" placeholder="Select division"
+                            (change)="getPreDistrict($event)" [disabled]="false">
                         </ng-select>
                         <div *ngIf="f['preDivisionID'].invalid && (f['preDivisionID'].touched || f['preDivisionID'].dirty || isSubmitted)" class="text-danger">
                             <i *ngIf="f['preDivisionID'].errors.required">Division is required</i>
@@ -24,7 +25,8 @@
       <i class="text-danger">*</i>
     </label>
                     <div class="col-sm-9">
-                        <ng-select [ngClass]="{'is-invalid': (f['preDistrictID'].touched || f['preDistrictID'].dirty || isSubmitted) && f['preDistrictID'].invalid}" [items]="allPreDistrict" bindLabel="districtName" bindValue="districtID" formControlName="preDistrictID" (change)="getPreUpazila(f['preDistrictID'].value)"
+                        <ng-select [ngClass]="{'is-invalid': (f['preDistrictID'].touched || f['preDistrictID'].dirty || isSubmitted) && f['preDistrictID'].invalid}" [items]="allPreDistrict" bindLabel="districtName" bindValue="districtID" formControlName="preDistrictID" 
+                        (change)="getPreUpazila($event)"
                             placeholder="Select District" [disabled]="false">
                         </ng-select>
                         <div *ngIf="f['preDistrictID'].invalid && (f['preDistrictID'].touched || f['preDistrictID'].dirty || isSubmitted)" class="text-danger">
@@ -38,7 +40,9 @@
       <i class="text-danger">*</i>
     </label>
                     <div class="col-sm-9">
-                        <ng-select [ngClass]="{'is-invalid': (f['preUpazilaID'].touched || f['preUpazilaID'].dirty || isSubmitted) && f['preUpazilaID'].invalid}" [items]="allPreUpazila" bindLabel="upazilaName" bindValue="upazilaID" formControlName="preUpazilaID" (change)="getPreThana(f['preUpazilaID'].value)"
+                        <ng-select [ngClass]="{'is-invalid': (f['preUpazilaID'].touched || f['preUpazilaID'].dirty || isSubmitted) && f['preUpazilaID'].invalid}"
+                         [items]="allPreUpazila" bindLabel="upazilaName" bindValue="upazilaID" formControlName="preUpazilaID" 
+                         (change)="getPreThana($event)"
                             placeholder="Select Upazila" [disabled]="false">
                         </ng-select>
                         <div *ngIf="f['preUpazilaID'].invalid && (f['preUpazilaID'].touched || f['preUpazilaID'].dirty || isSubmitted)" class="text-danger">
@@ -74,6 +78,7 @@
                     <tr>
                         <th>Thana ID</th>
                         <th>Thana Name</th>
+                        <!-- <th>Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -81,6 +86,9 @@
                         <tr *ngFor="let item of allPreThana; let i=index">
                             <td>{{item.thanaID}}</td>
                             <td>{{item.thanaName}}</td>
+                            <!-- <td>
+                                <button (click)="edit(item.thanaId)" class="btn btn-sm success"><i class="fas fa-pencil">Edit</i></button>
+                            </td> -->
                         </tr>
                 </tbody>
             </table>

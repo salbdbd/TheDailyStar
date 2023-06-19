@@ -17,6 +17,7 @@ import { TrainingInfoModel } from "../../../models/FlipBook/taining-info-model";
 import { RefarenceInfoModel } from "../../../models/FlipBook/refarence-info-model";
 import { CompanyTransferService } from "../../../services/hr/company-transfer.service";
 import { EmpPromotionViewModel } from "../../../models/hr/emp-promotion-view.model";
+import { NimineeInfo } from '../../../models/FlipBook/niminee-info';
 
 @Component({
   selector: 'app-personal-file',
@@ -33,9 +34,11 @@ export class PersonalFileComponent implements OnInit {
   //jobDiscription: Employment = new Employment();
   selectedEmployee: EmpGenInfo = new EmpGenInfo();
   allData: any[] = [];
+  nomineeInfo:any[]=[];
   empGenInfo: EmpGenInfo = new EmpGenInfo();
   empFamilyInfo: PersonalInfoModel = new PersonalInfoModel();
   empJoinInfo:JoiningInfoModel=new JoiningInfoModel();
+  empNomineeInfo:NimineeInfo[]=[];
   empEduInfo: EducationInfoModel[] = [];
   empExpInfo:ExpInfoModel[]=[];
   empAward:AwardModel[]=[];
@@ -80,6 +83,9 @@ export class PersonalFileComponent implements OnInit {
         this.empGenInfo = this.getGenInfo((this.allData[1])[0]);
         this.employment = this.getEmployment((this.allData[1])[0]);
         this.empFamilyInfo = (this.allData[2])[0];
+        // this.empNomineeInfo = this.getNomineeInfo((this.allData[2])[0]);
+        console.log( this.empFamilyInfo,' this.empFamilyInfo');
+        console.log( this.allData,' this.allData');
         this.empJoinInfo=(this.allData[4])[0];
         this.employment.jobDescription = this.getJobDescrioption((this.allData[9])[0]);
         this.empEduInfo = this.getEmpEduInfo(this.allData[3]);
@@ -94,6 +100,13 @@ export class PersonalFileComponent implements OnInit {
 
       }
     })
+  }
+  getNomineeInfo(nomineeInfo:any[]):NimineeInfo[]{
+    let empNominee:NimineeInfo[]=[];
+    nomineeInfo.forEach(refarence=>{
+      empNominee.push(refarence);
+    })
+    return empNominee;
   }
   getGenInfo(empInfo: any): EmpGenInfo {
     let empGenInfo = new EmpGenInfo();

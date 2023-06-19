@@ -1,14 +1,27 @@
 #flipbook {
     margin-left: 20px !important;
-    // height: 700px;
-    height: 800px;
-    overflow-x: scroll;
+    height: 700px;
+    
 }
 
 #flipbook .page {
     background: #ffffff;
 }
-
+#page2 {
+    overflow-x: scroll;
+}
+#page10 {
+    overflow-x: scroll;
+}
+#page8 {
+    overflow-x: scroll;
+}
+#page9 {
+    overflow-x: scroll;
+}
+#page4 {
+    overflow-x: scroll;
+}
 .page {
     padding: 0px;
 }

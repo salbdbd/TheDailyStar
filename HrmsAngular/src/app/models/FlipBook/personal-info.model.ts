@@ -16,9 +16,9 @@ export class PersonalInfoModel{
   permanentAddress:string
   mobile:string
   emergencyContractNo:string
-  nomineeName:string
-  percentageNominee:string
-  relationNominee:string
-  nomineeDateOfBirth:string
-  nomineeNID:string
+  // nomineeName:string
+  // percentageNominee:string
+  // relationNominee:string
+  // nomineeDateOfBirth:string
+  // nomineeNID:string
 }

@@ -28,6 +28,7 @@ export class ThanaComponent implements OnInit {
   allPreUpazila:Upazila[]=[];
   allPreThana:Thana[]=[];
   isSubmitted:boolean = false;
+  btnStatus:string;
   constructor(
     private formbuilder: FormBuilder,
     private basicES:BasicEntryService,
@@ -40,8 +41,6 @@ export class ThanaComponent implements OnInit {
     this.createForm();
     this.getCountries();
     this.getDivision();
-    // this.getPreDistrict();s
-
   }
   getCountries(){
     this.basicES.getCountry().subscribe((response:ApiResponse)=>{
@@ -54,38 +53,60 @@ export class ThanaComponent implements OnInit {
     this.setupService.getAllDivision().subscribe((response:ApiResponse)=>{
       if(response.status){
         this.allDivision = response.result as Division[];
+        console.log(this.allDivision )
       }
     })
   }
-  getPreDistrict(divisionId:number){
-    if(divisionId==null){
+  getPreDistrict(division){
+    console.log(division)
+    if(division==null){
       return;
     }
-    this.basicES.getDistricts(divisionId).subscribe((response:ApiResponse)=>{
-      if(response.status){
-        this.allPreDistrict = response.result as District[];
-      }
-    })
+    else{
+      this.thana.patchValue({
+        preDivisionID:division.divisionID
+      })
+      this.basicES.getDistricts(this.thana.value.preDivisionID).subscribe((response:ApiResponse)=>{
+        if(response.status){
+          this.allPreDistrict = response.result as District[];
+          console.log(this.allPreDistrict,'this.allPreDistrict')
+        }
+      })
+    }
+   
   }
-  getPreUpazila(districtId:number){
-    if(districtId==null){
+  getPreUpazila(district){
+    if(district==null){
     return;
     }
-    this.basicES.getUpazila(districtId).subscribe((response:ApiResponse)=>{
-      if(response.status){
-        this.allPreUpazila = response.result as Upazila[];
-      }
-    })
+    else{
+      this.thana.patchValue({
+        preDistrictID:district.districtID
+      })
+      this.basicES.getUpazila(this.thana.value.preDistrictID).subscribe((response:ApiResponse)=>{
+        if(response.status){
+          this.allPreUpazila = response.result as Upazila[];
+        }
+      })
+    }
+   
   }
-  getPreThana(upazilaId:number){
-    if(upazilaId==null){
+  getPreThana(upazila){
+    console.log(upazila,'upazila')
+    if(upazila==null){
       return;
     }
-    this.basicES.getThana(upazilaId).subscribe((response:ApiResponse)=>{
-      if(response.status){
-        this.allPreThana = response.result as Thana[];
-      }
-    })
+    else{
+      this.thana.patchValue({
+        preUpazilaID:upazila.upazilaID
+      })
+      this.basicES.getThana(this.thana.value.preUpazilaID).subscribe((response:ApiResponse)=>{
+        if(response.status){
+          this.allPreThana = response.result as Thana[];
+        }
+      })
+    }
+    
   }
   saveThana(){
     if(this.thana.invalid){
@@ -133,4 +154,18 @@ export class ThanaComponent implements OnInit {
   createNewItem(){
     this.modalService.open(this.modalName)
   }
+  edit(thanaId){
+    let terms=this.allPreThana.find(t=>t.thanaID==thanaId);
+    this.thana.patchValue({
+      thanaName:terms.thanaName
+    });
+    console.log(terms,thanaId)
+    this.btnStatus="Update"
+  }
+
+  // onSelect(termId){
+  //   let terms=this.termsList.find(t=>t.id==termId);
+  //   this.termsForm.patchValue(terms);
+  //   this.btnStatus="Update"
+  //     }
 }

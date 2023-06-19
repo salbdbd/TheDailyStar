@@ -83,7 +83,7 @@ getJobDescriptionById(id:number){
       id:[0,[]],
       empName:[this.empName,[]],
       empCode:[this.empCode,[]],
-      description:[,[Validators.required]],
+      description:[,[]],
       companyID:[this.compId,[]],
       msg:[,[]],
       pOptions:[,[]],
