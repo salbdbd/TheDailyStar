@@ -97,7 +97,7 @@ export class PersonalFileComponent implements OnInit {
         this.getPromotionInfoView();
       }
       else {
-
+        this.allData=[];
       }
     })
   }
@@ -181,6 +181,7 @@ export class PersonalFileComponent implements OnInit {
       console.log(this.alltransferdata);
       }
       else{
+        this.alltransferdata=[];
       }
     })
   }
@@ -190,6 +191,7 @@ export class PersonalFileComponent implements OnInit {
     this.allPromotiondata=response.result as EmpPromotionViewModel[];
       }
       else{
+        this.allPromotiondata=[];
       }
     })
   }
