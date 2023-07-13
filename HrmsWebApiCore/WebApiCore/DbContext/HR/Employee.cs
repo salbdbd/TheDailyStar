@@ -57,7 +57,8 @@ namespace WebApiCore.DbContext.HR
         }
         public static EmpGenInfoModel GetEmpGenInfo(int gradeVal, int companyId, string empCode)
         {
-            using (var con = new SqlConnection(Connection.ConnectionString())) 
+
+            using (var con = new SqlConnection(Connection.ConnectionString()))
             {
                 string filter = (gradeVal == -1) ? "GradeValue OR GradeValue IS NULL" : gradeVal.ToString();
                 string sql = $"SELECT * FROM EmpGeneralInfo Egi WHERE  Active=1 AND EmpCode='" + empCode + "'AND CompanyID=" + companyId;
@@ -66,6 +67,7 @@ namespace WebApiCore.DbContext.HR
                 employee.Age = DateManipulate.DateDiff(employee.DOB, DateTime.Now);
                 return employee;
             }
+        
         }
         public static bool UpdateEmpGenInfo(EmpGenInfoModel empGen)
         {

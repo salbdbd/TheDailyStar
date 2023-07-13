@@ -339,8 +339,10 @@
                             <tbody>
                                 <tr *ngFor="let transfer of alltransferdata; let i=index">
                                     <td width="80px">{{i+1}}</td>
-                                    <td width="150px">{{transfer.pasDepartment}}</td>
-                                    <td width="150px">{{transfer.preDepartMent}}</td>
+                                    <!-- <td width="150px">{{transfer.pasDepartment}}</td>
+                                    <td width="150px">{{transfer.preDepartMent}}</td> -->
+                                    <td width="150px">{{transfer.pasDesignation}}</td>
+                                    <td width="150px">{{transfer.preDesignation}}</td>
                                     <td width="80px">{{transfer.transferDate | date:'dd MMM yyyy'}}</td>
                                     <td width="80px">{{transfer.transferDate | date:'yyyy'}}</td>
                                 </tr>

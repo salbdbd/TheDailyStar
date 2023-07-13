@@ -17,11 +17,15 @@ namespace WebApiCore.DbContext.HR
             return dateset;
         }
 
+
+
+
         public static bool SaveUpdate(EmpCompanyTransferModel companyTransfer)
         {
             var conn=new SqlConnection(Connection.ConnectionString());
             var varperam = new
             {
+                companyTransfer.ID,
                 companyTransfer.EmpCode,
                 companyTransfer.PreCompanyID,
                 companyTransfer.PreDepartmentID,
@@ -56,7 +60,16 @@ namespace WebApiCore.DbContext.HR
             int rowAffect = conn.Execute("sp_EmpTransfer_Save",param:varperam,commandType:CommandType.StoredProcedure);
             return rowAffect > 0;
         }
-      public static  List<TransferViweModel> View(string EmpCode,int TPType,int CompanyID)
+
+
+        public static EmpCompanyTransferModel GetAllbyId(int id)
+        {
+            var con = new SqlConnection(Connection.ConnectionString());
+            var result = con.QuerySingle<EmpCompanyTransferModel>("SELECT * FROM EmpTransfer where ID=" + id);
+            return (result);
+        }
+
+        public static  List<TransferViweModel> View(string EmpCode,int TPType,int CompanyID)
         {
             var conn = new SqlConnection(Connection.ConnectionString());
             var peram = new

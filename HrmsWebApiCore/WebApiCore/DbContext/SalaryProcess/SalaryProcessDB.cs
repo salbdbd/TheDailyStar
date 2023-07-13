@@ -34,7 +34,7 @@ namespace WebApiCore.DbContext.SalaryProcess
                                 DeleteExistingSalary(model, conn, tran);
                                 ProcessEmpSalary(model, conn, tran);
                                 ProcessEmpAdvanceSalary(model, conn, tran);
-                               // ProcessEmpLWP(model, conn, tran);
+                                ProcessEmpLWP(model, conn, tran);
                                 tran.Commit();
                                 return employees;
                             }
@@ -162,7 +162,8 @@ namespace WebApiCore.DbContext.SalaryProcess
                 model.YearID,
                 EmployeeCode = model.EmpCode??"",
                 model.CompanyID,
-                Grade = (model.UserTypeID != 1 && model.UserTypeID != 4) ? model.Grade : -1,
+                //Grade = (model.UserTypeID != 1 && model.UserTypeID != 4) ? model.Grade : -1,
+                Grade = -1,
                 Block = "No"
             };
             int rowAffect = conn.Execute("spProcessEmpSalaryLWPPayscale", commandTimeout: 20000, param: obj, transaction: tran, commandType: CommandType.StoredProcedure);

@@ -16,6 +16,10 @@ export class CompanyTransferService {
       saveUpdate(transferModel:EmpCompanyTransfer){
         return this.http.post(environment.apiUrl+'/home/hr/company/transfer/save/update',transferModel);
       }
+
+      getByIdPromotion(id:number){
+        return this.http.get(environment.apiUrl+'/home/hr/company/transfer/edit/'+id);
+      }
       getEmpTransforView(empCode:string,companyID:number,tpType:number){
        return this.http.get(environment.apiUrl+'/home/hr/company/transfer/View/EmpCode/'+empCode+'/TPType/'+tpType+'/CompanyID/'+companyID)
       }

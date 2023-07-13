@@ -22,7 +22,7 @@ namespace Dapper.Framework
             }
             else
             {
-                _connectionString = $"Server={connectionString.Server};Database={connectionString.Database};Integrated Security={connectionString.IntegratedSecurity}; User ID={connectionString.UserId};Password={connectionString.Password}";
+                _connectionString = $"Server={connectionString.Server};Database={connectionString.Database};Integrated Security={connectionString.IntegratedSecurity}; User ID={connectionString.UserId};Password={connectionString.Password};";
             }
         }
 

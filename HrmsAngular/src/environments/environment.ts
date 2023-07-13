@@ -10,5 +10,5 @@ export const environment = {
 //  reportApiUrl : 'http://localhost:5200/api/v1/report',
   // apiUrl:'http://103.108.140.183:1021/api/v1',
   //  apiUrl:'http://103.108.140.183:1002/api/v1',
-  reportApiUrl : 'http://103.108.140.183:1031/api/v1/report'
+  reportApiUrl : 'http://103.118.19.110:1032/api/v1/report'
 };

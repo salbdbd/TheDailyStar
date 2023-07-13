@@ -46,7 +46,7 @@ export class LayoutNavbarComponent implements OnInit {
       this.gradeName = Helper.getEmpGradeName(Number(sessionStorage.getItem('gradeValue')))
     }
 
-    // this.checkTodaysBackup();
+    this.checkTodaysBackup();
   }
 
   currentBg() {

@@ -28,6 +28,7 @@ import { EmpBlockInfoModel } from '../../../models/hr/emp-block-info.model';
   '../../../../vendor/libs/ng-select/ng-select.scss']
 })
 export class EmpProInfoComponent implements OnInit {
+  isUpdating: boolean = false;
   compId: any;
   gradeValue: any;
   isSubmitted = false;
@@ -51,6 +52,7 @@ export class EmpProInfoComponent implements OnInit {
     private toaster: ToastrService,
     private salaryGradeES: SalaryGradeService,
     private companyTransferES: CompanyTransferService,
+    private dateFrmat:NgbDateCustomParserFormatter,
     private modalService:NgbModal
   ) { }
 
@@ -136,7 +138,8 @@ export class EmpProInfoComponent implements OnInit {
     })
   }
   savePromotionInfo() {
-    this.isSubmitted=true;
+    // this.isSubmitted=true;
+    this.isUpdating = true;
     if(this.empPromotion.invalid){
       this.toaster.warning("Fill All Required Field");
       return;
@@ -150,8 +153,23 @@ export class EmpProInfoComponent implements OnInit {
       } else {
         this.toaster.error(response.result, 'Failed')
       }
+      this.isUpdating = false;
     })
   }
+
+
+  getByIdPromotion(id:number){
+    this.companyTransferES.getByIdPromotion(id).subscribe((response:ApiResponse)=>{
+      if(response.status){
+        let promotion=response.result as EmpPromotionViewModel;
+        promotion.transferDateNgb=this.dateFrmat.stringToNgbDate(promotion.transferDate.toString());
+        this.empPromotion.patchValue(response.result);
+      }
+    }
+    )
+
+  }
+
   getProInfoView(empCode:string){
     this.companyTransferES.getEmpTransforView(empCode,this.compId,2).subscribe((response:ApiResponse)=>{
       if(response.status){
@@ -162,6 +180,18 @@ export class EmpProInfoComponent implements OnInit {
       }
     })
   }
+
+  getProInfoViewByType(tPType:number){
+    this.companyTransferES.getEmpTransforView(this.f.empCode.value,this.compId,tPType).subscribe((response:ApiResponse)=>{
+      if(response.status){
+    this.alldata=response.result as EmpPromotionViewModel[];
+      }
+      else{
+        this.alldata=[];
+      }
+    })
+  }
+
   getAllTransferType(){
     this.companyTransferES.GetTransferType(this.compId).subscribe((response:ApiResponse)=>{
       if(response.status){

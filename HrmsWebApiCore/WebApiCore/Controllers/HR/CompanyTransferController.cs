@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HRMS.DbContext.SalarySetup;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,7 @@ namespace WebApiCore.Controllers.HR
             }
 
         }
+
         [Authorize()]
         [HttpPost]
         [ApiVersion("1")]
@@ -115,6 +117,37 @@ namespace WebApiCore.Controllers.HR
             {
                 response.Status = false;
                 response.Result = err.Message;
+      
+            }
+            return Ok(response);
+        }
+
+
+        [HttpGet]
+        [Route("api/v{version:apiVersion}/home/hr/company/transfer/edit/{id}")]
+        public IActionResult GetAllById(int id)
+        {
+            Response response = new Response("/home/hr/company/transfer/edit/" + id);
+            var result = EmpCompanyTransfer.GetAllbyId(id);
+            try
+            {
+                if (result != null)
+                {
+                    response.Status = true;
+                    response.Result = result;
+                }
+                else
+                {
+                    response.Status = false;
+                    response.Result = "Data not found";
+                }
+
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                response.Status = false;
+                response.Result = e.Message;
                 return Ok(response);
             }
         }
